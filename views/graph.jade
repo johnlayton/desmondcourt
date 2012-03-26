@@ -1,0 +1,15 @@
+#chart(class='chart')
+link(rel='stylesheet', href='/stylesheets/graph.css')
+script(type="text/javascript", src="/javascripts/graph.js")
+script(type="text/javascript")
+    timeline = new TimeLine("chart", {
+      "xmax": new Date(),
+      "xmin": new Date(new Date().getTime() - (1000 * 60 * 60 * 24 * 14)),
+      "ymin": 0,
+      "ymax": 40,
+      "xeve": 100,
+      "yeve": 60,
+      "title": "Time Line",
+      "xlabel": "Date",
+      "ylabel": "Y Axis"
+    });

@@ -1,0 +1,55 @@
+#chart(class='chart')
+table(id='table')
+    tbody
+
+
+script(type="text/javascript")
+    matrix = [
+      {key: 1, value: [11975,  5871, 8916, 2868]},
+      {key: 2, value: [ 1951, 10048, 2060, 6171]},
+      {key: 3, value: [ 8010, 16145, 8090, 8045]},
+      {key: 4, value: [ 1013,   990,  940, 6907]}
+    ];
+
+    var tr = d3.select("body").select("table").select("tbody").selectAll("tr")
+            .data(matrix, function(d) { console.log(" data " + d); console.log(" key " + d.key); return d.key; });
+
+    tr.enter().append("tr");
+
+    var td = tr.selectAll("td")
+            .data(function(d) { console.log(" data " + d); console.log(" values " + d.value); return d.value; });
+
+    td.enter().append("td")
+        .text(function(d) {
+            return d;
+        });
+
+    td.exit().remove();
+
+    tr.exit().remove();
+
+
+    function other() {
+        matrix.shift();
+        matrix.push({key: 5, value: [1234, 5678, 8916, 2868]});
+
+        console.log(" data ... " + matrix[0].value);
+
+        tr = d3.select("body").select("table").select("tbody").selectAll("tr")
+            .data(matrix, function(d) { console.log(" data " + d); console.log(" key " + d.key); return d.key; });
+
+
+        tr.enter().append("tr").attr("class", "new");
+
+        td = tr.selectAll("td")
+            .data(function(d) { console.log(" data " + d); console.log(" values " + d.value); return d.value; });
+
+        td.enter().append("td")
+            .text(function(d) { console.log(d); return d; });
+
+        td.exit().remove();
+
+        tr.exit().remove();
+    }
+
+    setTimeout(other, 3000);
