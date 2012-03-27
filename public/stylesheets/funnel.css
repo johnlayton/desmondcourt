@@ -35,18 +35,14 @@ ul li {
 }
 */
 
-.name {
-    font-size: 0.8em;
-}
-
-.date {
+.label {
     font-size: 0.8em;
 }
 
 .funnel {
     /*background-color: #afd3f5;*/
-    /*width: 960px;*/
-    /*height: 500px;*/
+    width: 960px;
+    height: 500px;
 }
 
 /*
