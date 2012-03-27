@@ -6,9 +6,13 @@ script(type="text/javascript")
       "data": [
           { label: "search", colour: "#AAAAFF", value: 10000 },
           { label: "views",  colour: "#8888FF", value: 100 },
+          { label: "madeup", colour: "#FF2222", value: 10000 },
           { label: "leads",  colour: "#4444FF", value: 1 }
       ],
-      "title": "Time Line"
+      "title": "Time Line",
+      "scale": function(d, i) {
+        return ln(d)
+      }
     });
 
 
