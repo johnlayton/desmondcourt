@@ -34,11 +34,13 @@ var events = new Events('localhost', 5984)
 
 // Routes
 
-app.get('/',      routes.index);
-app.get('/tree',  routes.tree);
-app.get('/time',  routes.time);
-app.get('/graph', routes.graph);
-app.get('/table', routes.table);
+app.get('/',       routes.index);
+app.get('/tree',   routes.tree);
+app.get('/time',   routes.time);
+app.get('/graph',  routes.graph);
+app.get('/table',  routes.table);
+app.get('/funnel', routes.funnel);
+
 
 app.get('/events', function(req, res){
   events.findAll(function(error, docs){

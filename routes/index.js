@@ -22,3 +22,7 @@ exports.graph = function(req, res){
 exports.table = function(req, res){
   res.render('table', { title: 'Table' })
 };
+
+exports.funnel = function(req, res){
+  res.render('funnel', { title: 'Funnel' })
+};
