@@ -22,7 +22,7 @@ Funnel = function(elem, options) {
 
   this.gap = this.options.gap || 10;
 
-  this.data  = this.options.data || [];
+  this.data  = this.options.data  || [];
   this.scale = this.options.scale || new function(d) { return d.value; };
   this.range = this.options.range || new function() { d3.scale.sqrt(); };
 

@@ -4,14 +4,14 @@ script(type="text/javascript", src="/javascripts/funnel.js")
 script(type="text/javascript")
     new Funnel("funnel", {
       data: [
-          { label: "search", colour: "#AAAAFF", value: 100, ordinal: 1 },
+          { label: "search", colour: "#AAAAFF", value: 1000, ordinal: 1 },
           { label: "views",  colour: "#8888FF", value: 10,  ordinal: 1 },
-          { label: "leads",  colour: "#4444FF", value: 1,   ordinal: 1 }
+          { label: "leads",  colour: "#4444FF", value: 4,   ordinal: 1 }
       ],
       debug: false,
       gap: 5,
-      scale: function(d) { return d.ordinal; },
-      range: function()  { return d3.scale.linear(); }
+      scale: function(d) { return Math.log(d.value); },
+      range: function()  { return d3.scale.sqrt(); }
     });
 
 
