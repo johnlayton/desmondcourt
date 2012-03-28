@@ -1,6 +1,7 @@
 body {
     font-family: helvetica;
     font-size: 10;
+    font-weight: normal;
 }
 
 svg {
@@ -11,13 +12,14 @@ svg {
 
 .outline {
     fill: lightsteelblue;
-    stroke: steelblue;
+    stroke: red;
     stroke-width: 1px;
     fill-opacity: 0.2;
 }
 
 .label {
     font-size: 0.7em;
+    stroke: #223344;
 }
 
 .funnel {

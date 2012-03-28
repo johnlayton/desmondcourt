@@ -20,10 +20,15 @@ Funnel = function(elem, options) {
     "height": this.cy - this.padding.top  - this.padding.bottom
   };
 
-  this.data = this.options.data || []
+  this.gap = this.options.gap || 10;
 
-  var y1 = this.options.gap || 10,
-      y2 = (self.size.height - (y1 * (self.data.length - 1))) / self.data.length;
+  this.data  = this.options.data || [];
+  this.scale = this.options.scale || new function(d) { return d.value; };
+  this.range = this.options.range || new function() { d3.scale.sqrt(); };
+
+  this.tform = self.range()
+    .domain([0, d3.sum(self.data, function(d) { return self.scale(d); })])
+    .range([0, (self.size.height - (self.data.length - 1) * self.gap)]);
 
   var svg = d3.select(this.funnel).append("svg:svg")
     .attr("width",  self.cx)
@@ -54,6 +59,8 @@ Funnel = function(elem, options) {
     .append("svg:g")
       .attr("class", "chunk");
 
+  var total = 0;
+
   chunk.append("svg:polygon")
     .attr('fill', function(d) {
       return d.colour;
@@ -61,8 +68,10 @@ Funnel = function(elem, options) {
     .attr('stroke', 'darkblue')
     .attr('points', function(d, i) {
 
-      var b1 = i * (y1 + y2);
-      var b2 = (i * (y1 + y2)) + y2;
+      var b1 = (i * self.gap) + self.tform(total);
+      var b2 = (i * self.gap) + self.tform(total + self.scale(d));
+
+      total += self.scale(d);
 
       var d = function(x) {
         return ((self.size.width * x) / (2 * self.size.height));
@@ -74,13 +83,18 @@ Funnel = function(elem, options) {
         [ self.size.width - d(b2), b2 ].join(","),
         [ d(b2),     b2 ].join(",")
       ].join(" ");
+
     })
     .attr('stroke-width', '1');
+
+  total = 0;
 
   chunk.append("svg:text")
     .attr('class', 'label')
     .attr("y", function(d, i) {
-      return (i * (y1 + y2)) + (y2 / 2);
+      var y = (i * self.gap) + self.tform(total + (self.scale(d) / 2));
+      total += self.scale(d);
+      return y;
     })
     .attr("x", function(d) {
       return self.size.width / 2;
@@ -91,3 +105,4 @@ Funnel = function(elem, options) {
       return d.label;
     });
 }
+

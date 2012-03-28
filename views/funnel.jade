@@ -3,16 +3,15 @@ link(rel='stylesheet', href='/stylesheets/funnel.css')
 script(type="text/javascript", src="/javascripts/funnel.js")
 script(type="text/javascript")
     new Funnel("funnel", {
-      "data": [
-          { label: "search", colour: "#AAAAFF", value: 10000 },
-          { label: "views",  colour: "#8888FF", value: 100 },
-          { label: "leads",  colour: "#4444FF", value: 1 }
+      data: [
+          { label: "search", colour: "#AAAAFF", value: 100, ordinal: 1 },
+          { label: "views",  colour: "#8888FF", value: 10,  ordinal: 1 },
+          { label: "leads",  colour: "#4444FF", value: 1,   ordinal: 1 }
       ],
-      "title": "Time Line",
-      "gap": 5,
-      "scale": function(d, i) {
-        return ln(d)
-      }
+      debug: false,
+      gap: 5,
+      scale: function(d) { return d.ordinal; },
+      range: function()  { return d3.scale.linear(); }
     });
 
 
